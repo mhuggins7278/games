@@ -9,7 +9,7 @@
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-		"deploy": "NODE_ENV=production npm run build && npx gh-pages -d build"
+		"deploy": "NODE_ENV=production npm run build && npx gh-pages -d build -t true"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "1.0.0-next.21",
