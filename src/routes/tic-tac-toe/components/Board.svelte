@@ -1,40 +1,40 @@
 <script>
 	import Square from './Square.svelte';
-	const initalBoard = [
-		{ value: 2, owner: null },
-		{ value: 7, owner: null },
-		{ value: 6, owner: null },
-		{ value: 9, owner: null },
-		{ value: 5, owner: null },
-		{ value: 1, owner: null },
-		{ value: 4, owner: null },
-		{ value: 3, owner: null },
-		{ value: 8, owner: null }
-	];
-	let squares = initalBoard.map((a) => ({ ...a }));
+	const initialBoard2 = new Map([
+		[2, null],
+		[7, null],
+		[6, null],
+		[9, null],
+		[5, null],
+		[1, null],
+		[4, null],
+		[3, null],
+		[8, null]
+	]);
+
+	let squares = new Map(initialBoard2);
 	let winner = null;
 
 	let currentPlayer = 'X';
 
 	$: status = `Next Player: ${currentPlayer}`;
+
 	function squareClickHandler(key) {
 		if (winner) {
 			return;
 		}
-		squares = squares.map((square) => {
-			if (square['value'] === key && !square['owner']) {
-				square['owner'] = currentPlayer;
-				winner = calculateWinner();
-				currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-			}
-			return square;
-		});
+		if (!squares.get(key)) {
+			squares.set(key, currentPlayer);
+			winner = calculateWinner();
+			currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+		}
+		squares = new Map([...squares]);
 	}
 	function calculateWinner() {
-		let currentPlayerSquares = squares
-			.map((square) => {
-				if (square['owner'] === currentPlayer) {
-					return square['value'];
+		let currentPlayerSquares = [...squares.keys()]
+			.map((key) => {
+				if (squares.get(key) === currentPlayer) {
+					return key;
 				}
 			})
 			.filter((i) => i);
@@ -51,12 +51,12 @@
 			}
 		}
 
-		const isDraw = squares.every((square) => square['owner'] !== null);
+		const isDraw = [...squares.values()].every((square) => square !== null);
 		return isDraw ? "It's a draw" : null;
 	}
 
 	function resetGame() {
-		squares = initalBoard.map((a) => ({ ...a }));
+		squares = new Map(initialBoard2);
 		winner = null;
 	}
 </script>
@@ -64,8 +64,8 @@
 <div class="text-center">
 	<h3 class="my-6">{winner ? winner : status}</h3>
 	<div class="grid gap-1 grid-rows-3 grid-cols-3 bg-gray-200">
-		{#each squares as square}
-			<Square value={square['owner']} handleClick={() => squareClickHandler(square['value'])} />
+		{#each [...squares] as [key, owner]}
+			<Square value={owner} handleClick={() => squareClickHandler(key)} />
 		{/each}
 	</div>
 	<button
