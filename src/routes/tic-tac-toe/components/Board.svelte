@@ -1,5 +1,6 @@
 <script>
 	import Square from './Square.svelte';
+	import { makeMove } from '../lib/bot';
 	const initialBoard2 = new Map([
 		[2, null],
 		[7, null],
@@ -25,15 +26,22 @@
 		}
 		if (!squares.get(key)) {
 			squares.set(key, currentPlayer);
-			winner = calculateWinner();
+			winner = calculateWinner(squares);
 			currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+		}
+		if (currentPlayer === 'O' && !winner) {
+			const nextMove = makeMove(squares);
+			if (nextMove) squares.set(nextMove, currentPlayer);
+			winner = calculateWinner(squares);
+
+			currentPlayer = currentPlayer === 'O' ? 'X' : 'O';
 		}
 		squares = new Map([...squares]);
 	}
-	function calculateWinner() {
-		let currentPlayerSquares = [...squares.keys()]
+	function calculateWinner(squaresToCheck) {
+		let currentPlayerSquares = [...squaresToCheck.keys()]
 			.map((key) => {
-				if (squares.get(key) === currentPlayer) {
+				if (squaresToCheck.get(key) === currentPlayer) {
 					return key;
 				}
 			})
@@ -58,6 +66,7 @@
 	function resetGame() {
 		squares = new Map(initialBoard2);
 		winner = null;
+		currentPlayer = 'X';
 	}
 </script>
 
