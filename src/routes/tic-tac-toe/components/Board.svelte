@@ -11,7 +11,7 @@
 		{ value: 3, owner: null },
 		{ value: 8, owner: null }
 	];
-	let squares = [...initalBoard];
+	let squares = initalBoard.map((a) => ({ ...a }));
 	let winner = null;
 
 	let currentPlayer = 'X';
@@ -56,14 +56,13 @@
 	}
 
 	function resetGame() {
-		squares = [...initalBoard];
+		squares = initalBoard.map((a) => ({ ...a }));
 		winner = null;
 	}
 </script>
 
 <div class="text-center">
 	<h3 class="my-6">{winner ? winner : status}</h3>
-
 	<div class="grid gap-1 grid-rows-3 grid-cols-3 bg-gray-200">
 		{#each squares as square}
 			<Square value={square['owner']} handleClick={() => squareClickHandler(square['value'])} />
