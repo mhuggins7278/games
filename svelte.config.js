@@ -14,8 +14,7 @@ const config = {
 		target: '#svelte',
 		adapter: adapter(),
 		paths: {
-			base: dev ? '' : '/games',
-			assets: dev ? '' : '/games'
+			base: dev ? '' : '/games'
 		}
 	}
 };
