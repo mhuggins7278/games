@@ -1,6 +1,7 @@
 <script>
 	import Square from './Square.svelte';
 	import { makeMove } from '../lib/bot';
+	import { scale } from 'svelte/transition';
 	const initialBoard2 = new Map([
 		[2, null],
 		[7, null],
@@ -22,14 +23,14 @@
 
 	$: {
 		if (currentPlayer === 'O' && !winner) {
-      setTimeout(() => {
-      const nextMove = makeMove(squares)
-      if (nextMove) squares.set(nextMove, currentPlayer);
-      winner = calculateWinner(squares);
+			setTimeout(() => {
+				const nextMove = makeMove(squares);
+				if (nextMove) squares.set(nextMove, currentPlayer);
+				winner = calculateWinner(squares);
 
-      currentPlayer = currentPlayer === 'O' ? 'X' : 'O';
-      squares = new Map([...squares]);
-      }, 300)
+				currentPlayer = currentPlayer === 'O' ? 'X' : 'O';
+				squares = new Map([...squares]);
+			}, 300);
 		}
 	}
 
@@ -78,12 +79,16 @@
 </script>
 
 <div class="text-center">
-	<h3 class="my-6">{winner ? winner : status}</h3>
-	<div class="grid gap-1 grid-rows-3 grid-cols-3 bg-gray-200">
-		{#each [...squares] as [key, owner]}
-			<Square value={owner} handleClick={() => squareClickHandler(key)} />
-		{/each}
-	</div>
+	{#if winner}
+		<h3 class="my-6" in:scale={{ duration: 1000 }}>{winner}</h3>
+	{:else}
+		<h3 class="my-6" in:scale={{ duration: 1000 }}>{status}</h3>
+	{/if}
+		<div class="grid gap-1 grid-rows-3 grid-cols-3 bg-gray-200">
+			{#each [...squares] as [key, owner]}
+				<Square value={owner} handleClick={() => squareClickHandler(key)} />
+			{/each}
+		</div>
 	<button
 		class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-12"
 		on:click={resetGame}>RESET</button
