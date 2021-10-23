@@ -31,6 +31,6 @@ const getNextBestMove = (availableSquares) => {
    if (centerSquare) return centerSquare;
    const cornerSquares = availableSquares.filter(s => s % 2 === 0)
 	 const cornerSquare = Math.floor(Math.random() * cornerSquares.length)
-   if (cornerSquare >= 0) return cornerSquares[cornerSquare];
+   if (cornerSquare >= 0 && cornerSquares.length > 2) return cornerSquares[cornerSquare];
 	 return availableSquares[Math.floor(Math.random() * availableSquares.length)];
 };

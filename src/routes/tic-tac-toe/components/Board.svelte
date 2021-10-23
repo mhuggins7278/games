@@ -20,8 +20,21 @@
 
 	$: status = `Next Player: ${currentPlayer}`;
 
-	function squareClickHandler(key) {
-		if (winner) {
+	$: {
+		if (currentPlayer === 'O' && !winner) {
+      setTimeout(() => {
+      const nextMove = makeMove(squares)
+      if (nextMove) squares.set(nextMove, currentPlayer);
+      winner = calculateWinner(squares);
+
+      currentPlayer = currentPlayer === 'O' ? 'X' : 'O';
+      squares = new Map([...squares]);
+      }, 300)
+		}
+	}
+
+	async function squareClickHandler(key) {
+		if (winner || currentPlayer === 'O') {
 			return;
 		}
 		if (!squares.get(key)) {
@@ -29,13 +42,7 @@
 			winner = calculateWinner(squares);
 			currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
 		}
-		if (currentPlayer === 'O' && !winner) {
-			const nextMove = makeMove(squares);
-			if (nextMove) squares.set(nextMove, currentPlayer);
-			winner = calculateWinner(squares);
 
-			currentPlayer = currentPlayer === 'O' ? 'X' : 'O';
-		}
 		squares = new Map([...squares]);
 	}
 	function calculateWinner(squaresToCheck) {
