@@ -57,6 +57,7 @@
 		if (currentPlayerSquares.length < 3) {
 			return;
 		}
+    /*inspired by https://fowlie.github.io/2018/08/24/winning-algorithm-for-tic-tac-toe-using-a-3x3-magic-square/  */
 		for (var i = 0; i < currentPlayerSquares.length; i++) {
 			for (var j = i + 1; j < currentPlayerSquares.length; j++) {
 				for (var k = j + 1; k < currentPlayerSquares.length; k++) {

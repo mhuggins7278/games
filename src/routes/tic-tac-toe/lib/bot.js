@@ -13,6 +13,7 @@ export const makeMove = (squares) => {
 	return getNextBestMove(availableSquares);
 };
 
+// insipred by https://fowlie.github.io/2018/08/24/winning-algorithm-for-tic-tac-toe-using-a-3x3-magic-square/
 const getMove = (selectedSquares, availableSquares) => {
 	for (var i = 0; i < availableSquares.length; i++) {
 		for (var j = 0; j < selectedSquares.length; j++) {
