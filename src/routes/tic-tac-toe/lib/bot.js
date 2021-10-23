@@ -27,9 +27,10 @@ const getMove = (selectedSquares, availableSquares) => {
 };
 
 const getNextBestMove = (availableSquares) => {
-	let nextMove = availableSquares.find((s) => s % 2 === 0);
-	if (nextMove) return nextMove;
-	nextMove = availableSquares.find((s) => s === 5);
-	if (nextMove) return nextMove;
-	return availableSquares[0];
+   const centerSquare = availableSquares.find(s => s === 5)
+   if (centerSquare) return centerSquare;
+   const cornerSquares = availableSquares.filter(s => s % 2 === 0)
+	 const cornerSquare = Math.floor(Math.random() * cornerSquares.length)
+   if (cornerSquare >= 0) return cornerSquares[cornerSquare];
+	 return availableSquares[Math.floor(Math.random() * availableSquares.length)];
 };
