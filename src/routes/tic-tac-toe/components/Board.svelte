@@ -84,11 +84,11 @@
 	{:else}
 		<h3 class="my-6" in:scale={{ duration: 1000 }}>{status}</h3>
 	{/if}
-		<div class="grid gap-1 grid-rows-3 grid-cols-3 bg-gray-200">
-			{#each [...squares] as [key, owner]}
-				<Square value={owner} handleClick={() => squareClickHandler(key)} />
-			{/each}
-		</div>
+	<div class="grid gap-1 grid-rows-3 grid-cols-3 bg-gray-200">
+		{#each [...squares] as [key, owner]}
+			<Square value={owner} handleClick={() => squareClickHandler(key)} />
+		{/each}
+	</div>
 	<button
 		class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-12"
 		on:click={resetGame}>RESET</button
