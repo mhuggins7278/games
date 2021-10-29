@@ -75,7 +75,6 @@
 	function resetGame() {
 		squares = new Map(initialBoard2);
 		winner = null;
-		currentPlayer = 'X';
 	}
 </script>
 
