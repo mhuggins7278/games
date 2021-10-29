@@ -30,7 +30,7 @@
 
 				currentPlayer = currentPlayer === 'O' ? 'X' : 'O';
 				squares = new Map([...squares]);
-			}, 300);
+			}, 800);
 		}
 	}
 
@@ -85,7 +85,7 @@
 	{:else}
 		<h3 class="my-6" in:scale={{ duration: 1000 }}>{status}</h3>
 	{/if}
-	<div class="grid gap-1 grid-rows-3 grid-cols-3 bg-gray-200">
+	<div class="grid gap-1 grid-rows-3 grid-cols-3 bg-gray-200 place-items-center">
 		{#each [...squares] as [key, owner]}
 			<Square value={owner} handleClick={() => squareClickHandler(key)} />
 		{/each}
