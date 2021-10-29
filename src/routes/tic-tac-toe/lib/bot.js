@@ -2,6 +2,8 @@ export const makeMove = (squares) => {
 	const availableSquares = [...squares.keys()].filter((key) => !squares.get(key));
 	if (!availableSquares.length) return;
 	if (availableSquares.length === 1) return availableSquares[0];
+  if (availableSquares.length === 9) 	 return availableSquares[Math.floor(Math.random() * availableSquares.length)];
+
 
 	const otherPlayersSquares = [...squares.keys()].filter((key) => squares.get(key) === 'X');
 	const mySquares = [...squares.keys()].filter((key) => squares.get(key) === 'O');
