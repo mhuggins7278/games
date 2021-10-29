@@ -1,6 +1,6 @@
 <script>
-	import { fly, fade, slide, scale, draw } from 'svelte/transition';
-	import { quintOut } from 'svelte/easing';
+	import { draw } from 'svelte/transition';
+	import { quadIn } from 'svelte/easing';
 	export let value;
 	export let handleClick;
 </script>
@@ -24,7 +24,7 @@
 					</clipPath>
 				</defs>
 				<path
-					in:draw={{ duration: 900 }}
+					in:draw={{ duration: 900, easing: quadIn }}
 					d="m22 5-16 20-6-13 7-7 15 20"
 					clip-path="url(#clipPath2777)"
 					fill="none"
@@ -51,7 +51,7 @@
 					</clipPath>
 				</defs>
 				<path
-					in:draw={{ duration: 900 }}
+					in:draw={{ duration: 900, easing: quadIn }}
 					d="m13 4-3 2-2 2-2 4v8l2 2 3 2h4l4-2 1-2 2-3v-9l-4-4h-4l-2 1"
 					clip-path="url(#clipPath1421)"
 					fill="none"
