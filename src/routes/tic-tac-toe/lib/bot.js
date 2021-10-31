@@ -1,18 +1,26 @@
-export const makeMove = (squares) => {
-	const availableSquares = [...squares.keys()].filter((key) => !squares.get(key));
+import { get } from 'svelte/store';
+import { squares } from '../lib/stores';
+import { updateGameState } from './game';
+
+export const makeMove = () => {
+	const localSquares = get(squares);
+	const availableSquares = [...localSquares.keys()].filter((key) => !localSquares.get(key));
 	if (!availableSquares.length) return;
-	if (availableSquares.length === 1) return availableSquares[0];
-  if (availableSquares.length === 9) 	 return availableSquares[Math.floor(Math.random() * availableSquares.length)];
+	if (availableSquares.length === 1) return updateGameState(availableSquares[0]);
+	if (availableSquares.length === 9)
+		return updateGameState(availableSquares[Math.floor(Math.random() * availableSquares.length)]);
 
-
-	const otherPlayersSquares = [...squares.keys()].filter((key) => squares.get(key) === 'X');
-	const mySquares = [...squares.keys()].filter((key) => squares.get(key) === 'O');
+	const otherPlayersSquares = [...localSquares.keys()].filter(
+		(key) => localSquares.get(key) === 'X'
+	);
+	const mySquares = [...localSquares.keys()].filter((key) => localSquares.get(key) === 'O');
 
 	const winningMove = getMove(mySquares, availableSquares);
-	if (winningMove) return winningMove;
+	if (winningMove) return updateGameState(winningMove);
 	const blockingMove = getMove(otherPlayersSquares, availableSquares);
-	if (blockingMove) return blockingMove;
-	return getNextBestMove(availableSquares);
+	if (blockingMove) return updateGameState(blockingMove);
+	const nextBestMove = getNextBestMove(availableSquares);
+	return updateGameState(nextBestMove);
 };
 
 // insipred by https://fowlie.github.io/2018/08/24/winning-algorithm-for-tic-tac-toe-using-a-3x3-magic-square/
@@ -30,10 +38,10 @@ const getMove = (selectedSquares, availableSquares) => {
 };
 
 const getNextBestMove = (availableSquares) => {
-   const centerSquare = availableSquares.find(s => s === 5)
-   if (centerSquare) return centerSquare;
-   const cornerSquares = availableSquares.filter(s => s % 2 === 0)
-	 const cornerSquare = Math.floor(Math.random() * cornerSquares.length)
-   if (cornerSquare >= 0 && cornerSquares.length > 2) return cornerSquares[cornerSquare];
-	 return availableSquares[Math.floor(Math.random() * availableSquares.length)];
+	const centerSquare = availableSquares.find((s) => s === 5);
+	if (centerSquare) return centerSquare;
+	const cornerSquares = availableSquares.filter((s) => s % 2 === 0);
+	const cornerSquare = Math.floor(Math.random() * cornerSquares.length);
+	if (cornerSquare >= 0 && cornerSquares.length > 2) return cornerSquares[cornerSquare];
+	return availableSquares[Math.floor(Math.random() * availableSquares.length)];
 };

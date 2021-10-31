@@ -1,10 +1,10 @@
-import { writable, readable, derived } from 'svelte/store';
+import { writable, readable, derived, get } from 'svelte/store';
 
 export const currentPlayer = writable('X');
 
 export const winner = writable(null);
 
-export const initialBoard2 = readable(
+export const initialBoard = readable(
 	new Map([
 		[2, null],
 		[7, null],
@@ -17,6 +17,8 @@ export const initialBoard2 = readable(
 		[8, null]
 	])
 );
+
+export const squares = writable(new Map(get(initialBoard)));
 
 export const status = derived(currentPlayer, ($currentPlayer) => {
 	return `Next Player: ${$currentPlayer}`;
