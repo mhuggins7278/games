@@ -1,0 +1,30 @@
+name: GitHub Pages deploy
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Build
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14.13.1'
+        cache: 'npm'
+    - run: npm install
+    - run: npm build
+
+
+    - name: Deploy to GitHub Pages
+      uses: Cecilapp/GitHub-Pages-deploy@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        email: arnaud@ligny.org
+        build_dir: build
