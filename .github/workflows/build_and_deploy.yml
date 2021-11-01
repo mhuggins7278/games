@@ -26,5 +26,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        email: arnaud@ligny.org
+        email: mhuggins7278@gmail.com
         build_dir: build
