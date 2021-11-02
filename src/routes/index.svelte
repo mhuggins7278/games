@@ -1,2 +1,9 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<div class="flex w-full justify-center flex-col">
+	<h1 class="text-4xl text-center">Welcome to my playground</h1>
+	<p class="mt-8 text-center">
+		I've wanted to learn svelte for a while now. I was trying to come up with a side project that
+		would keep my interest and I stumbled on a youtube video of someone making minesweeper and got
+		inspired. I figured what better way to learn than building some simple games. <br/>
+    Tic Tac Toe is my first attempt. <br/>
+	</p>
+</div>
