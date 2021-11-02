@@ -8,7 +8,8 @@
 		<slot  />
 	</div>
   <footer class="absolute bottom-0 h-16 ml-96">
-    <a rel="external" target="_blank" href="https://github.com/mhuggins7278">https://github.com/mhuggins7278<a/>
+    <a rel="external" target="_blank" href="https://github.com/mhuggins7278">https://github.com/mhuggins7278</a>
+
   </footer>
 </div>
 
