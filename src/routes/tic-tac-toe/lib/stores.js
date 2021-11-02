@@ -1,4 +1,5 @@
 import { writable, readable, derived, get } from 'svelte/store';
+import { browser } from '$app/env';
 
 export const currentPlayer = writable('X');
 
@@ -20,6 +21,12 @@ export const initialBoard = readable(
 
 export const squares = writable(new Map(get(initialBoard)));
 
-export const status = derived(currentPlayer, ($currentPlayer) => {
+export const status = derived(currentPlayer, $currentPlayer => {
 	return `Next Player: ${$currentPlayer}`;
 });
+
+export const record = writable(
+	browser && JSON.parse(sessionStorage.getItem('TicTacToeRecord')) || {wins: 0, losses: 0, draws: 0}
+);
+
+record.subscribe((val) => browser && sessionStorage.setItem('TicTacToeRecord', JSON.stringify(val)))

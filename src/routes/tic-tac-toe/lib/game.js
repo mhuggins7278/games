@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { initialBoard, winner, squares, currentPlayer } from './stores';
+import { initialBoard, winner, squares, currentPlayer, record } from './stores';
 import { makeMove } from '../lib/bot';
 
 export function resetGame() {
@@ -26,15 +26,16 @@ export function updateGameState(key, event) {
 }
 
 export function calculateWinner(squaresToCheck) {
+  const localRecord = get(record)
 	const localCurrentPlayer = get(currentPlayer);
 
 	let currentPlayerSquares = [...squaresToCheck.keys()]
-		.map((key) => {
+		.map(key => {
 			if (squaresToCheck.get(key) === localCurrentPlayer) {
 				return key;
 			}
 		})
-		.filter((i) => i);
+		.filter(i => i);
 	if (currentPlayerSquares.length < 3) {
 		return;
 	}
@@ -43,17 +44,26 @@ export function calculateWinner(squaresToCheck) {
 		for (var j = i + 1; j < currentPlayerSquares.length; j++) {
 			for (var k = j + 1; k < currentPlayerSquares.length; k++) {
 				if (currentPlayerSquares[i] + currentPlayerSquares[j] + currentPlayerSquares[k] === 15) {
+					if (localCurrentPlayer === 'X') {
+						record.set({ ...localRecord, wins: localRecord.wins += 1 });
+					} else {
+						record.set({ ...localRecord, losses: localRecord.losses += 1 });
+					}
 					return `Winner is ${localCurrentPlayer}`;
 				}
 			}
 		}
 	}
 
-	const isDraw = [...get(squares).values()].every((square) => square !== null);
-	return isDraw ? "It's a draw" : null;
+	const isDraw = [...get(squares).values()].every(square => square !== null);
+	if (isDraw) {
+		record.set({ ...localRecord, draws: localRecord.draws += 1 });
+		return "It's a draw";
+	}
+	return null;
 }
 
-currentPlayer.subscribe((value) => {
+currentPlayer.subscribe(value => {
 	let localWinner = get(winner);
 	if (value === 'O' && !localWinner) {
 		setTimeout(() => {
