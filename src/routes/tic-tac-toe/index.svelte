@@ -2,6 +2,9 @@
 	import Board from './components/Board.svelte';
 	import { record } from './lib/stores';
 </script>
+<script context="module">
+	export const prerender = true;
+</script>
 
 <svelte:head>
 	<title>Tic Tac Toe</title>
