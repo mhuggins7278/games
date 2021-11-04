@@ -1,3 +1,6 @@
+<script context="module">
+	export const prerender = true;
+</script>
 <div class="flex w-full justify-center flex-col">
 	<h1 class="text-4xl text-center">Welcome to my playground</h1>
 	<p class="mt-8 text-center">

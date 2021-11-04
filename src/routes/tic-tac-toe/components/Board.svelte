@@ -12,7 +12,7 @@
 		<h3 class="my-6" in:scale={{ duration: 1000 }}>{$status}</h3>
 	{/if}
 	<div class="flex flex-row justify-center">
-		<div class="grid gap-1 grid-rows-3 grid-cols-3 bg-gray-200 place-items-center">
+		<div class="grid gap-1 grid-rows-3 grid-cols-3 bg-gray-300 place-items-center">
 			{#each [...$squares] as [key, owner]}
 				<Square value={owner} handleClick={event => updateGameState(key, event)} />
 			{/each}

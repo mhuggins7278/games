@@ -5,7 +5,7 @@
 	export let handleClick;
 </script>
 
-<div class="w-16 h-16 bg-white flex justify-center items-center" on:click={handleClick}>
+<div class="w-16 h-16 bg-gray-100 flex justify-center items-center" on:click={handleClick}>
 	{#each [value] as v (v)}
 		{#if v === 'X'}
 			<svg
