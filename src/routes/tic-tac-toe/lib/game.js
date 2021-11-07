@@ -19,14 +19,16 @@ export function updateGameState(key, event) {
 	if (!localSquares.get(key)) {
 		localSquares = localSquares.set(key, localCurrentPlayer);
 		winner.set(calculateWinner(localSquares));
-		currentPlayer.set(localCurrentPlayer === 'X' ? 'O' : 'X');
+		setTimeout(() => {
+			currentPlayer.set(localCurrentPlayer === 'X' ? 'O' : 'X');
+		}, 900);
 	}
 
 	squares.set(new Map([...localSquares]));
 }
 
 export function calculateWinner(squaresToCheck) {
-  const localRecord = get(record)
+	const localRecord = get(record);
 	const localCurrentPlayer = get(currentPlayer);
 
 	let currentPlayerSquares = [...squaresToCheck.keys()]
@@ -45,9 +47,9 @@ export function calculateWinner(squaresToCheck) {
 			for (var k = j + 1; k < currentPlayerSquares.length; k++) {
 				if (currentPlayerSquares[i] + currentPlayerSquares[j] + currentPlayerSquares[k] === 15) {
 					if (localCurrentPlayer === 'X') {
-						record.set({ ...localRecord, wins: localRecord.wins += 1 });
+						record.set({ ...localRecord, wins: (localRecord.wins += 1) });
 					} else {
-						record.set({ ...localRecord, losses: localRecord.losses += 1 });
+						record.set({ ...localRecord, losses: (localRecord.losses += 1) });
 					}
 					return `Winner is ${localCurrentPlayer}`;
 				}
@@ -57,7 +59,7 @@ export function calculateWinner(squaresToCheck) {
 
 	const isDraw = [...get(squares).values()].every(square => square !== null);
 	if (isDraw) {
-		record.set({ ...localRecord, draws: localRecord.draws += 1 });
+		record.set({ ...localRecord, draws: (localRecord.draws += 1) });
 		return "It's a draw";
 	}
 	return null;
@@ -66,8 +68,6 @@ export function calculateWinner(squaresToCheck) {
 currentPlayer.subscribe(value => {
 	let localWinner = get(winner);
 	if (value === 'O' && !localWinner) {
-		setTimeout(() => {
-			makeMove();
-		}, 1200);
+		makeMove();
 	}
 });
