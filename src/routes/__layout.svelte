@@ -2,7 +2,7 @@
 	import Nav from '../components/nav.svelte';
 </script>
 
-<div class="text-gray-800 font-mono flex flex-col h-screen bg-gray-100">
+<div class="text-gray-900 font-mono flex flex-col h-screen bg-gray-50">
 		<Nav />
 		<main class="px-6 flex-1">
 			<slot />
