@@ -28,3 +28,4 @@ jobs:
       with:
         email: mhuggins7278@gmail.com
         build_dir: build
+        jekyll: no
