@@ -1,6 +1,7 @@
 <script context="module">
 	import Board from './components/Board.svelte';
 	import { result, flagsLeft } from './lib/stores';
+
 </script>
 
 <script>

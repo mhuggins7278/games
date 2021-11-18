@@ -3,13 +3,13 @@
 		width,
 		bombAmount,
 		flags,
+		flagsLeft,
 		isGameOver,
 		bombsArray,
 		emptyArray,
 		gameArray,
 		shuffledArray,
 		board,
-		flagsLeft,
 		result
 	} from '../lib/stores';
 
@@ -87,6 +87,36 @@
 		}, 10);
 	}
 
+	//toggle Flag with right click
+	function toggleFlag(square) {
+		let localFlagCount = $flags;
+		if ($isGameOver) return;
+		if (!square.checked && $flags < $bombAmount) {
+			const localBoard = $board;
+			localBoard[square.id].flag = !square.flag;
+			localBoard[square.id].displayValue = square.flag ? '🚩' : '';
+			square.flag ? localFlagCount++ : localFlagCount--;
+			$flags = localFlagCount;
+			$board = [...localBoard];
+			if (square.flag) checkForWin()
+		}
+	}
+
+	//check for win
+	function checkForWin() {
+	if ($flagsLeft > 0) return;
+		///simplified win argument
+		const matches = $board.reduce((acc, square) => {
+			if (square.flag && square.value === 'bomb') return acc++;
+			return acc;
+		}, 0);
+
+		if (matches === $bombAmount) {
+			$result = 'YOU WIN!';
+			$isGameOver = true;
+		}
+	}
+
 	function createBoard() {
 		//get shuffled game array with random bombs
 		$bombsArray = Array($bombAmount).fill('bomb');
@@ -125,13 +155,13 @@
 
 <div class="flex flex-row justify-center">
 	<div class={`shadow-2xl grid grid-cols-${$width} place-items-center`}>
-		{#each $board as square}
-			<button
+		{#each $board as square (square.id)}
+			<span
 				on:click={event => handleClick(square, event)}
+				on:contextmenu|preventDefault={toggleFlag(square)}
 				class="border-gray-50 border rounded shadow bg-gray-200 w-14 h-14 flex justify-center items-center"
-				>{square.displayValue}</button
+				>{square.displayValue}</span
 			>
-			<!-- <Square value={owner} handleClick={event => updateGameState(key, event)} /> -->
 		{/each}
 	</div>
 </div>
