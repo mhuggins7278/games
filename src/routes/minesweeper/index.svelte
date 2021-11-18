@@ -1,7 +1,7 @@
 <script context="module">
 	import Board from './components/Board.svelte';
+	import { createBoard } from './lib/game';
 	import { result, flagsLeft } from './lib/stores';
-
 </script>
 
 <script>
@@ -15,6 +15,6 @@
 <div class="flex justify-center align-center">
 	<div class="flex flex-col mt-8 justify-center align-center ">
 		<div>Flags left: {$flagsLeft}</div>
-		<div>{$result}</div>
+		<div on:click={createBoard} class="mx-auto mt-4 text-6xl">{$result}</div>
 	</div>
 </div>
