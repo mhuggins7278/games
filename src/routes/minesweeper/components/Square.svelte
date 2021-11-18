@@ -121,6 +121,8 @@
 	{square.value === 'bomb' && $isGameOver ? 'bg-gray-50': ''}
 	{square.checked ? 'bg-gray-100' : 'bg-gray-300 shadow-xl-2'} 
 	w-14 
+	sm:h-8
+sm:w-8	
 	h-14
 	flex 
 	justify-center
