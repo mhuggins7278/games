@@ -108,7 +108,7 @@
 		}
 	}
 </script>
-
+{#if square}
 <span
 	on:click={event => handleClick(square, event)}
 	on:contextmenu|preventDefault={toggleFlag(square)}
@@ -131,3 +131,4 @@
 	{square.count >= 4 && square.value === 'valid' ? 'text-red-500' : ''}
 	">{square.displayValue}</span
 >
+{/if}
