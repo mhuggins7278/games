@@ -11,6 +11,7 @@
 	<title>MineSweeper</title>
 </svelte:head>
 
+<p class="justify-center align-center flex mb-4 text-xs">To toggle a flag either right click or click and hold if using a touch screen.<p/>
 <Board />
 <div class="flex justify-center align-center">
 	<div class="flex flex-col mt-8 justify-center align-center ">
