@@ -130,8 +130,8 @@
 	{square.checked ? 'bg-gray-100' : 'bg-gray-300 shadow-xl-2'} 
 	lg:w-14 
 	lg:h-14
-	h-10
-  w-10	
+	h-8
+  w-8	
 	flex 
 	justify-center
 	items-center
