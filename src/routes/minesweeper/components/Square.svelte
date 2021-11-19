@@ -34,7 +34,7 @@
 
     //show ALL the bombs
     $board = [
-      ...$board.map(square => {
+      ...$board.map((square) => {
         if (square.value === 'bomb') {
           square.displayValue = '💣';
           square.checked = square.id === id ? true : false;
@@ -50,35 +50,43 @@
     const isRightEdge = id % $width === $width - 1;
 
     setTimeout(() => {
+      //check the square to the left
       if (id > 0 && !isLeftEdge) {
         const nextSquare = $board[id - 1];
         handleClick(nextSquare);
       }
+      //check the square up and to the right
       if (id > 9 && !isRightEdge) {
         const nextSquare = $board[id + 1 - $width];
         handleClick(nextSquare);
       }
-      if (id > 10) {
+      //check the square above the current square
+      if (id >= 10) {
         const nextSquare = $board[id - $width];
         handleClick(nextSquare);
       }
-      if (id > 11 && !isLeftEdge) {
+      //check the square up and to the left
+      if (id > 10 && !isLeftEdge) {
         const nextSquare = $board[id - 1 - $width];
         handleClick(nextSquare);
       }
-      if (id < 98 && !isRightEdge) {
+      // check the square to the right
+      if (id <= 98 && !isRightEdge) {
         const nextSquare = $board[id + 1];
         handleClick(nextSquare);
       }
+      //check the square below and to the left
       if (id < 90 && !isLeftEdge) {
         const nextSquare = $board[id - 1 + $width];
         handleClick(nextSquare);
       }
-      if (id < 88 && !isRightEdge) {
+      //check the square below and to the right
+      if (id <= 88 && !isRightEdge) {
         const nextSquare = $board[id + 1 + $width];
         handleClick(nextSquare);
       }
-      if (id < 89) {
+      //check the square below
+      if (id <= 89) {
         const nextSquare = $board[id + $width];
         handleClick(nextSquare);
       }
@@ -118,7 +126,7 @@
 
 {#if square}
   <span
-    on:click={event => handleClick(square, event)}
+    on:click={(event) => handleClick(square, event)}
     on:contextmenu|preventDefault={toggleFlag(square)}
     class="
 		font-black
