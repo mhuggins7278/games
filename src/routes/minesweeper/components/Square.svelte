@@ -47,7 +47,8 @@ import {getSquarePosition} from '../lib/game'
   }
 
   function checkNeighbouringSquares(square) {
-    const { isLeftEdge, isRightEdge, isTopRow, isBottomRow } = getSquarePosition(square.id)
+    const { id } = square;
+    const { isLeftEdge, isRightEdge, isTopRow, isBottomRow } = getSquarePosition(id)
 
     setTimeout(() => {
       //check the square to the left
