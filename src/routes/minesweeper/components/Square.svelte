@@ -149,6 +149,6 @@ import {getSquarePosition} from '../lib/game'
 	{square.count === 2 && square.value === 'valid' ? 'text-green-500' : ''}
 	{square.count === 3 && square.value === 'valid' ? 'text-yellow-500' : ''}
 	{square.count >= 4 && square.value === 'valid' ? 'text-red-500' : ''}
-	">{square.count ? square.count : square.value}</span
+	">{square.displayValue}</span
   >
 {/if}
