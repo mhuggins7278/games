@@ -10,6 +10,8 @@
     result
   } from '../lib/stores';
 
+import {getSquarePosition} from '../lib/game'
+
   function handleClick(square, event) {
     //if the game is over or the square was already clicked return
     if ($isGameOver || square.checked || square.flag) return;
@@ -45,49 +47,47 @@
   }
 
   function checkNeighbouringSquares(square) {
-    const { id } = square;
-    const isLeftEdge = id % $width === 0;
-    const isRightEdge = id % $width === $width - 1;
+    const { isLeftEdge, isRightEdge, isTopRow, isBottomRow } = getSquarePosition(square.id)
 
     setTimeout(() => {
       //check the square to the left
-      if (id > 0 && !isLeftEdge) {
+      if (!isLeftEdge) {
         const nextSquare = $board[id - 1];
         handleClick(nextSquare);
       }
-      //check the square up and to the right
-      if (id > 9 && !isRightEdge) {
-        const nextSquare = $board[id + 1 - $width];
-        handleClick(nextSquare);
-      }
-      //check the square above the current square
-      if (id >= 10) {
-        const nextSquare = $board[id - $width];
-        handleClick(nextSquare);
-      }
-      //check the square up and to the left
-      if (id > 10 && !isLeftEdge) {
-        const nextSquare = $board[id - 1 - $width];
-        handleClick(nextSquare);
-      }
       // check the square to the right
-      if (id <= 98 && !isRightEdge) {
+      if (!isRightEdge) {
         const nextSquare = $board[id + 1];
         handleClick(nextSquare);
       }
+      //check the square below
+      if (!isBottomRow) {
+        const nextSquare = $board[id + $width];
+        handleClick(nextSquare);
+      }
+      //check the square above the current square
+      if (!isTopRow) {
+        const nextSquare = $board[id - $width];
+        handleClick(nextSquare);
+      }
+      //check the square up and to the right
+      if (!isTopRow && !isRightEdge) {
+        const nextSquare = $board[id + 1 - $width];
+        handleClick(nextSquare);
+      }
+      //check the square up and to the left
+      if (!isTopRow && !isLeftEdge) {
+        const nextSquare = $board[id - 1 - $width];
+        handleClick(nextSquare);
+      }
       //check the square below and to the left
-      if (id < 90 && !isLeftEdge) {
+      if (!isBottomRow && !isLeftEdge) {
         const nextSquare = $board[id - 1 + $width];
         handleClick(nextSquare);
       }
       //check the square below and to the right
-      if (id <= 88 && !isRightEdge) {
+      if (!isBottomRow&& !isRightEdge) {
         const nextSquare = $board[id + 1 + $width];
-        handleClick(nextSquare);
-      }
-      //check the square below
-      if (id <= 89) {
-        const nextSquare = $board[id + $width];
         handleClick(nextSquare);
       }
     }, 10);
@@ -149,6 +149,6 @@
 	{square.count === 2 && square.value === 'valid' ? 'text-green-500' : ''}
 	{square.count === 3 && square.value === 'valid' ? 'text-yellow-500' : ''}
 	{square.count >= 4 && square.value === 'valid' ? 'text-red-500' : ''}
-	">{square.displayValue}</span
+	">{square.count ? square.count : square.value}</span
   >
 {/if}
