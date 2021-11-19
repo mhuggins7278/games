@@ -90,7 +90,7 @@
         const nextSquare = $board[id + $width];
         handleClick(nextSquare);
       }
-    }, 20);
+    }, 10);
   }
 
   //toggle Flag with right click
@@ -136,10 +136,12 @@
 	{square.value === 'bomb' && square.checked ? 'bg-red-500' : ''}
 	{square.value === 'bomb' && $isGameOver ? 'bg-gray-50' : ''}
 	{square.checked ? 'bg-gray-100' : 'bg-gray-300 shadow-xl-2'} 
-	lg:w-14 
-	lg:h-14
-	h-8
-  w-8	
+	h-6
+  w-6	
+  md:w-10
+  md:h-10
+	xl:w-14 
+	xl:h-14
 	flex 
 	justify-center
 	items-center
