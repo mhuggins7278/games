@@ -131,12 +131,12 @@ import {getSquarePosition} from '../lib/game'
     on:contextmenu|preventDefault={toggleFlag(square)}
     class="
 		font-black
-  border-gray-500
+  border-gray-dark
   border 
   rounded 
-	{square.value === 'bomb' && square.checked ? 'bg-red-500' : ''}
-	{square.value === 'bomb' && $isGameOver ? 'bg-gray-50' : ''}
-	{square.checked ? 'bg-gray-100' : 'bg-gray-300 shadow-xl-2'} 
+	{square.value === 'bomb' && square.checked ? 'bg-red' : ''}
+	{square.value === 'bomb' && $isGameOver ? 'bg-gray-light' : ''}
+	{square.checked ? 'bg-gray-light' : 'bg-gray shadow-xl-2'} 
 	h-6
   w-6	
   md:w-10
@@ -146,10 +146,10 @@ import {getSquarePosition} from '../lib/game'
 	flex 
 	justify-center
 	items-center
-	{square.count === 1 && square.value === 'valid' ? 'text-blue-500' : ''}
-	{square.count === 2 && square.value === 'valid' ? 'text-green-500' : ''}
-	{square.count === 3 && square.value === 'valid' ? 'text-yellow-500' : ''}
-	{square.count >= 4 && square.value === 'valid' ? 'text-red-500' : ''}
+	{square.count === 1 && square.value === 'valid' ? 'text-blue-light' : ''}
+	{square.count === 2 && square.value === 'valid' ? 'text-green' : ''}
+	{square.count === 3 && square.value === 'valid' ? 'text-yellow' : ''}
+	{square.count >= 4 && square.value === 'valid' ? 'text-red' : ''}
 	">{square.displayValue}</span
   >
 {/if}

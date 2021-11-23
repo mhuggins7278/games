@@ -5,7 +5,7 @@
 	export let handleClick;
 </script>
 
-<div class="w-16 h-16 bg-gray-100 flex justify-center items-center" on:click={handleClick}>
+<div class="w-16 h-16 bg-gray-light flex justify-center items-center" on:click={handleClick}>
 	{#each [value] as v (v)}
 		{#if v === 'X'}
 			<svg
@@ -15,6 +15,7 @@
 				xmlns="http://www.w3.org/2000/svg"
 				width="18px"
 				height="18px"
+				class="stroke-current text-yellow-dark"
 			>
 				<defs>
 					<clipPath id="clipPath2777">
@@ -28,7 +29,6 @@
 					d="m22 5-16 20-6-13 7-7 15 20"
 					clip-path="url(#clipPath2777)"
 					fill="none"
-					stroke="#000"
 					stroke-linecap="round"
 					stroke-linejoin="round"
 					stroke-width="3.5"
@@ -42,6 +42,7 @@
 				xmlns="http://www.w3.org/2000/svg"
 				width="18px"
 				height="18px"
+				class="stroke-current text-blue-dark"
 			>
 				<defs>
 					<clipPath id="clipPath1421">
@@ -55,7 +56,7 @@
 					d="m13 4-3 2-2 2-2 4v8l2 2 3 2h4l4-2 1-2 2-3v-9l-4-4h-4l-2 1"
 					clip-path="url(#clipPath1421)"
 					fill="none"
-					stroke="#000"
+					stroke="#009FB7"
 					stroke-linecap="round"
 					stroke-linejoin="round"
 					stroke-width="3.6472"
