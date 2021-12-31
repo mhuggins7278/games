@@ -2,7 +2,6 @@
   export let square
   import {
     flags,
-    flagsLeft,
     bombAmount,
     width,
     isGameOver,

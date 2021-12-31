@@ -5,9 +5,6 @@ export const bombAmount = readable(20);
 export const flags = writable(0);
 export const isGameOver = writable(false);
 export const board = writable([]);
-export const flagsLeft = derived(flags, $flags => {
-	return get(bombAmount) - $flags;
-}, bombAmount);
 export const result = writable('😐');
 
 // export const status = derived(currentPlayer, $currentPlayer => {
