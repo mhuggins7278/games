@@ -3,6 +3,9 @@ import { browser } from '$app/env';
 export const width = readable(10);
 export const bombAmount = readable(20);
 export const flags = writable(0);
+export const flagsLeft = derived(flags, $flags => {
+	return get(bombAmount) - $flags;
+}, bombAmount);
 export const isGameOver = writable(false);
 export const board = writable([]);
 export const result = writable('😐');
