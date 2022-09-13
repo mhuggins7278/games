@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { initialBoard, winner, squares, currentPlayer, record } from './stores';
+import { initialBoard, winner, squares, currentPlayer, record, moveInProgress } from './stores';
 import { makeMove } from '../lib/bot';
 
 export function resetGame() {
@@ -11,6 +11,8 @@ export function resetGame() {
 }
 
 export function updateGameState(key, event) {
+  if (get(moveInProgress)) return;
+  moveInProgress.set(true);
 	let localSquares = get(squares);
 	const localCurrentPlayer = get(currentPlayer);
 	if (get(winner) || (event && localCurrentPlayer === 'O')) {
@@ -20,6 +22,7 @@ export function updateGameState(key, event) {
 		localSquares = localSquares.set(key, localCurrentPlayer);
 		winner.set(calculateWinner(localSquares));
 		setTimeout(() => {
+      moveInProgress.set(false);
 			currentPlayer.set(localCurrentPlayer === 'X' ? 'O' : 'X');
 		}, 900);
 	}

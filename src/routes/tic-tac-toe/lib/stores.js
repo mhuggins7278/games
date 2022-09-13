@@ -5,6 +5,8 @@ export const currentPlayer = writable('X');
 
 export const winner = writable(null);
 
+export const moveInProgress = writable(false);
+
 export const initialBoard = readable(
 	new Map([
 		[2, null],
